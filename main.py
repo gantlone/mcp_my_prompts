@@ -1,0 +1,55 @@
+from mcp.server.fastmcp import FastMCP
+
+mcp = FastMCP("rogerlin的google")
+
+# 語言字串翻譯工具
+@mcp.tool()
+def translate_to_chinese(text: str) -> str:
+    """將文字翻譯成中文"""
+
+    # 預設prompt
+    strDetails = f"翻譯輸出部分分為兩大類:\n\n"
+    strDetails += f"1. 中文意義: 請幫我解釋一下這段話的意思，並用繁體中文解釋。如果遇到的是問句的話，也希望提供給我對應的該國語言回答參考。如果提供的範例句子是日文漢字也請一併提供給我平假名或片假名。另外如果是句子也幫我分析它的組成為何那樣寫。\n\n"
+    strDetails += f"2. 舉一反三: 也把該單字或句子，以該語言的形式舉例生活化的簡易句子，好讓我學習該語言。 如果提供的範例句子是日文漢字也請一併提供給我平假名或片假名。希望範例盡可能是N4.N5的學生懂得文法。\n\n"
+    strDetails += f"請根據以上要求，對「{text}」進行完整的翻譯和分析。\n\n"
+
+    return f"需要翻譯的句子或單字: {text}\n\n" + strDetails
+
+# 單字聯想工具
+@mcp.tool()
+def word_association(word: str) -> str:
+    """聯想單字"""
+
+    # 預設prompt
+    strDetails = f"請根據以下要求，對「{word}」進行聯想:\n\n"
+    strDetails += f"1. 請提供該單字的詞性、三句生活化例子。\n\n"
+    strDetails += f"2. 請列出與該單字相關的同義詞、反義詞等等，有相關性的單字即可，我希望但單字是先顯示中文再顯示對應語言。\n\n"
+    strDetails += f"3. 如果可以的話，2.顯示的單字也附上一句相關例句，越生活化越好。\n\n"
+    strDetails += f"最後，以上內容都要顯示對應單字的語言，顯示對應的單字或句子文法，不用太難N4、N5程度即可。如果是日文漢字的話，要額外顯示平假名或片假名不然有些漢字不會念。\n\n"
+
+
+    return f"需要聯想的單字: {word}\n\n" + strDetails
+
+# 香水推薦
+@mcp.tool()
+def recommend_perfumes(country: str = "韓國、日本、台灣", age_group: str = "25-30") -> str:
+    """香水推薦"""
+
+    # 預設prompt
+    strDetails = f"能不能幫我尋找{country}女性{age_group}歲之間喜歡男士用甚麼香水。\n\n"
+    strDetails += f"近3年的統計，\n\n"
+    strDetails += f"以國家為單位顯示top5，用表格(table)或markdown的樣貌，\n\n"
+    strDetails += f"附上「香水名稱、台灣價格、台灣供貨狀況、味道描述、適合時段與場合、性別偏好、持香時間」。\n\n"
+    strDetails += f"例如:\n\n"
+    strDetails += f"香水名稱: Jo Malone 海鹽與鼠尾草\n\n"
+    strDetails += f"台灣價格: 2699-2900元\n\n"
+    strDetails += f"台灣供貨狀況: 大部分電商有貨，價格穩定，有折扣機會。\n\n"
+    strDetails += f"味道描述: 清新海風與礦物鹽氣息，混搭地中海鼠尾草，略帶木質感。\n\n"
+    strDetails += f"適合時段與場合: 白天／春夏，適合上班、日常、短約會。\n\n"
+    strDetails += f"性別偏好: 中性偏女：女生喜歡、男生多接受。\n\n"
+    strDetails += f"持香時間: 約 4–6 小時。\n\n"
+
+    return strDetails
+
+if __name__ == "__main__":
+    mcp.run()
