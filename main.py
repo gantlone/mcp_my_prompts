@@ -1,6 +1,6 @@
 from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP("rogerlin的google")
+mcp = FastMCP("rogerlin_google")
 
 # 語言字串翻譯工具
 @mcp.tool()
@@ -48,6 +48,23 @@ def recommend_perfumes(country: str = "韓國、日本、台灣", age_group: str
     strDetails += f"適合時段與場合: 白天／春夏，適合上班、日常、短約會。\n\n"
     strDetails += f"性別偏好: 中性偏女：女生喜歡、男生多接受。\n\n"
     strDetails += f"持香時間: 約 4–6 小時。\n\n"
+
+    return strDetails
+
+# 遊戲王牌組分析
+@mcp.tool()
+def analyze_yugioh_deck(deck: str) -> str:
+    """分析遊戲王牌組"""
+
+    # 預設prompt
+    strDetails = f"請幫我分析這個遊戲王牌組主題為: {deck}\n\n"
+    strDetails += f"希望你能根據牌組主題找到對應日文的部分，接下來會用到的任何卡片你都傳給我日文名稱即可。\n\n"
+    strDetails += f"以下為我想快速得知的注意事項細節：\n\n"
+    strDetails += f"1. 為快攻、控制、展開?\n\n"
+    strDetails += f"2. 主要怕哪些手坑? (ex: マリス(malice)、オルフェゴール(orcust) 怕 聖遺物-聖槍)\n\n"
+    strDetails += f"3. 該主題展開時要斷哪裡，並告訴我具體連鎖(chain)細節? (ex: V・HERO インクリース發效果時，這邊繳うらら是最傷的。)\n\n"
+    strDetails += f"4. 先後手可能會放的坑?\n\n"
+    strDetails += f"ps: 這邊這段最重要！！！我希望你給的卡片名稱是真的有存在，而不是你瞎掰的！！！\n\n"
 
     return strDetails
 
