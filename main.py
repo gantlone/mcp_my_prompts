@@ -64,9 +64,26 @@ def analyze_yugioh_deck(deck: str) -> str:
     strDetails += f"2. 主要怕哪些手坑? (ex: マリス(malice)、オルフェゴール(orcust) 怕 聖遺物-聖槍)\n\n"
     strDetails += f"3. 該主題展開時要斷哪裡，並告訴我具體連鎖(chain)細節? (ex: V・HERO インクリース發效果時，這邊繳うらら是最傷的。)\n\n"
     strDetails += f"4. 先後手可能會放的坑?\n\n"
-    strDetails += f"ps: 這邊這段最重要！！！我希望你給的卡片名稱是真的有存在，而不是你瞎掰的！！！\n\n"
+    strDetails += f"ps: 這邊這段最重要！！！我希望你給的卡片名稱是真的有存在，而不是你瞎掰的！！！！\n\n"
 
     return strDetails
+
+# 日本語gogogo目錄聯想
+@mcp.tool()
+def japanese_gogogo_association(text: str, level: str = "N5") -> str:
+    """聯想日本語gogogo目錄內容"""
+
+    # 預設prompt
+    strDetails = f"請根據日本語gogogo目錄內容「{text}」進行聯想，程度為:「{level}」\n\n"
+    strDetails += f"會分成以下部分來教學:\n\n"
+    strDetails += f"1. 單字: 為「{level}」會考的單字，並且用於文法教學時一併舉例使用。\n\n"
+    strDetails += f"2. 文法: 一個章節大約有4個文法，所以你可以幫我聯想該內容會教哪些，並提供對應範例。\n\n"
+    strDetails += f"3. 文法小老師: 這邊就是把前面文法的地方，用老師的口吻再簡單針對那些文法，講更細節的地方，好比為何這句子要用這個助詞之類的。\n\n"
+    strDetails += f"又或是其他你覺得可以補充的文法細節。\n\n"
+    strDetails += f"4. 補充: 這裡可以補充上述單字、文法，實際用於日本社會對答時的範例，ex: 大多時候跟熟人會說どっも，不會說ありがとうございます。太正式太教科書了，懂嗎類似這種例子。\n\n"
+    strDetails += f"5. 最後: 因為我日文漢字沒有很好，希望有提到漢字時，能一併附上對應假名讓我知道怎麼念。\n\n"
+
+    return f"需要聯想的單字: {text}\n\n" + strDetails
 
 if __name__ == "__main__":
     mcp.run()
